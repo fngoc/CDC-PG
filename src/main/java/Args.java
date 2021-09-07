@@ -2,19 +2,19 @@ import com.beust.jcommander.Parameter;
 
 public class Args {
 
-    @Parameter(names = "-ip", arity = 1, description = "Ip")
+    @Parameter(names = "-i", arity = 1, description = "Ip", required = true)
     private String ip;
 
-    @Parameter(names = {"-port", "-p"}, arity = 1, description = "Port")
+    @Parameter(names = {"-port", "-p"}, arity = 1, description = "Port", required = true)
     private String port;
 
-    @Parameter(names = {"-user", "-u"}, arity = 1, description = "Login")
+    @Parameter(names = {"-user", "-u"}, arity = 1, description = "Login", required = true)
     private String login;
 
-    @Parameter(names = {"-password", "-w"}, arity = 1, description = "Password")
+    @Parameter(names = {"-password", "-w"}, arity = 1, description = "Password", required = true)
     private String password;
 
-    @Parameter(names = {"-database", "-d"}, arity = 1, description = "Database")
+    @Parameter(names = {"-database", "-d"}, arity = 1, description = "Database", required = true)
     private String database;
 
     @Parameter(names = {"-replica", "-r"}, arity = 1, description = "Name replica")

@@ -32,10 +32,10 @@ public class Main {
             PGProperty.PREFER_QUERY_MODE.set(props, "simple");
 
             Connection connection = DriverManager.getConnection("jdbc:postgresql://" +
-                    arguments.getIp() + ":" + arguments.getPort() + "/postgres", props);
+                    arguments.getIp() + ":" + arguments.getPort() + "/" + arguments.getDatabase(), props);
             PGConnection replConnection = connection.unwrap(PGConnection.class);
 
-            String replicaName = "replica";
+            String replicaName = "replica_slot";
             try {
                 if (arguments.getNameReplica() != null) {
                     try {
@@ -51,6 +51,7 @@ public class Main {
                 reedReplica(replConnection, replicaName, file);
             }
         } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
             System.out.println("Something went wrong with the SQL query");
         } catch (IOException ioException) {
             System.out.println("Problem creating or writing to file");

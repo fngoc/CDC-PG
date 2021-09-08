@@ -19,13 +19,14 @@ public class Main {
             DriverConnect.setProperties(arguments);
             DriverConnect.run();
         } catch (SQLException sqlException) {
-            System.out.println("Make sure you have the wal2json plugin installed:\n" +
-                    "You can install it with [apt-get install postgresql-13-wal2json] command.\n" +
-                    "Also make sure that the following values are in the PostgreSQL configuration file:\n" +
+            sqlException.printStackTrace();
+            System.out.println("1. Make sure you have the wal2json plugin installed:\n" +
+                    "You can install it with [apt-get install postgresql-13-wal2json] command.\n\n" +
+                    "2. Also make sure that the following values are in the PostgreSQL configuration file:\n" +
                     "max_wal_senders = 4 - greater than zero\n" +
                     "wal_level = logical\n" +
-                    "max_replication_slots = 4 - greater than zero\n" +
-                    "Make sure you are not overshot the replication slot limit.");
+                    "max_replication_slots = 4 - greater than zero\n\n" +
+                    "3. Make sure you are not overshot the replication slot limit.");
         } catch (IOException ioException) {
             System.out.println("Problem creating or writing to file");
         }

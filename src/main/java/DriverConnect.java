@@ -36,11 +36,11 @@ public class DriverConnect {
     }
 
     public static void run() throws SQLException, IOException {
-        createReplicaSlot();
-        reedReplicaSlot();
+        createReplicationSlot();
+        reedReplicationSlot();
     }
 
-    private static void reedReplicaSlot() throws SQLException, IOException {
+    private static void reedReplicationSlot() throws SQLException, IOException {
         File file = new File(pathFile);
         PGReplicationStream stream = replConnection.getReplicationAPI()
                 .replicationStream()
@@ -66,7 +66,7 @@ public class DriverConnect {
         }
     }
 
-    private static void createReplicaSlot() {
+    private static void createReplicationSlot() {
         if (replicaName.equals("replica_slot"))
             System.out.println("A slot with this name already exists, default replica name is chosen [replica_slot]");
         try {

@@ -1,10 +1,12 @@
+import org.apache.commons.codec.binary.Base64;
+import org.json.JSONObject;
 import org.postgresql.PGConnection;
 import org.postgresql.PGProperty;
 import org.postgresql.replication.PGReplicationStream;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +20,10 @@ public class DriverConnect {
     private static String replicaName;
     private static String pathFile;
 
+    private static boolean flagKafkaConnector;
+
     public static void setProperties(Args args) throws SQLException {
+        flagKafkaConnector = args.isFlagKafkaConnector();
         Properties props = new Properties();
         PGProperty.USER.set(props, args.getLogin());
         PGProperty.PASSWORD.set(props, args.getPassword());
@@ -58,12 +63,36 @@ public class DriverConnect {
             byte[] source = msg.array();
             int length = source.length - offset;
             String text = new String(source, offset, length);
-            System.out.println(text);
-            FileWriter fileWriter = new FileWriter(file, true);
-            fileWriter.write(text);
-            fileWriter.write('\n');
-            fileWriter.close();
+            writeInFile(file, text);
+            if (flagKafkaConnector)
+                sendRequestToKafkaConnector(text);
         }
+    }
+
+    private static void sendRequestToKafkaConnector(String message) throws IOException {
+        JSONObject jsonObject= new JSONObject(message);
+        byte[] bytesEncoded = Base64.encodeBase64(jsonObject.toString().getBytes());
+
+        String url = "http://localhost:8080/publish?message=" + new String(bytesEncoded);
+        URL obj = new URL(url);
+        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+    }
+
+    private static void writeInFile(File file, String text) throws IOException {
+        System.out.println(text);
+        FileWriter fileWriter = new FileWriter(file, true);
+        fileWriter.write(text);
+        fileWriter.write('\n');
+        fileWriter.close();
     }
 
     private static void createReplicationSlot() {

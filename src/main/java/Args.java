@@ -23,6 +23,9 @@ public class Args {
     @Parameter(names = {"-file", "-f"}, arity = 1, description = "Path file")
     private String path = null;
 
+    @Parameter(names = {"-k"}, description = "Flag for Kafka Connector")
+    private boolean flagKafkaConnector;
+
     public String getIp() { return ip; }
 
     public String getPort() { return port; }
@@ -36,4 +39,6 @@ public class Args {
     public String getNameReplica() { return nameReplica; }
 
     public String getPath() { return path; }
+
+    public boolean isFlagKafkaConnector() { return flagKafkaConnector; }
 }

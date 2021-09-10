@@ -15,7 +15,6 @@ import java.util.Properties;
 
 public class DriverConnect {
 
-    private static Connection connection;
     private static PGConnection replConnection;
     private static String replicaName;
     private static String pathFile;
@@ -34,7 +33,7 @@ public class DriverConnect {
         replicaName = args.getNameReplica() != null ? args.getNameReplica() : "replica_slot";
         pathFile = args.getPath() != null ? args.getPath() : replicaName + ".json";
 
-        connection  = DriverManager.getConnection("jdbc:postgresql://" +
+        Connection connection = DriverManager.getConnection("jdbc:postgresql://" +
                 args.getIp() + ":" + args.getPort() + "/" + args.getDatabase(), props);
 
         replConnection = connection.unwrap(PGConnection.class);
@@ -88,7 +87,7 @@ public class DriverConnect {
     }
 
     private static void writeInFile(File file, String text) throws IOException {
-        System.out.println(text);
+//        System.out.println(text);
         FileWriter fileWriter = new FileWriter(file, true);
         fileWriter.write(text);
         fileWriter.write('\n');
@@ -105,10 +104,10 @@ public class DriverConnect {
                     .withSlotName(replicaName)
                     .withOutputPlugin("wal2json")
                     .make();
-            System.out.println("Replication slot already exists");
+            System.out.println("New replication slot created");
         }
         catch (SQLException sqlException) {
-            System.out.println("Replication slot already exists");
+            System.out.println("Connected to an existing replication slot");
         }
     }
 }

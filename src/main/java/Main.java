@@ -27,7 +27,7 @@ public class Main {
                 "max_wal_senders = 4 - greater than zero\n" +
                 "wal_level = logical\n" +
                 "max_replication_slots = 4 - greater than zero\n\n" +
-                "2. Make sure you are not overshot the replication slot limit."
+                "3. Make sure you are not overshot the replication slot limit."
             );
         } catch (IOException e) {
             System.out.println("Problem creating or writing to file");

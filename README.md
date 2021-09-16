@@ -6,4 +6,4 @@ Change Data Capture (CDC) PostgreSQL is the process of recognising when data has
 
 ## Using
 
-Program arguments: `-i ip` `-p port` `-u user_name` `-w password` `-d database_name` `[-r replica_slot_name]` `[-f file_path]`
+Program arguments: `-i ip` `-p port` `-u user_name` `-w password` `-d database_name` `-l publication_name` `[-r replica_slot_name]` `[-f file_path]`

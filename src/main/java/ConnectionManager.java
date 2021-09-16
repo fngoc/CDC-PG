@@ -64,27 +64,15 @@ public class ConnectionManager {
         }
     }
 
-    public PGConnection getReplConnection() {
-        return replConnection;
-    }
+    public PGConnection getReplConnection() {return replConnection; }
 
-    public Connection getSqlConnection() {
-        return sqlConnection;
-    }
+    public Connection getSqlConnection() { return sqlConnection; }
 
-    public String getReplicaName() {
-        return replicaName;
-    }
+    public String getReplicaName() { return replicaName; }
 
-    public String getPublicationName() {
-        return publicationName;
-    }
+    public String getPublicationName() { return publicationName; }
 
-    public String getPathFile() {
-        return pathFile;
-    }
+    public String getPathFile() { return pathFile; }
 
-    public boolean isFlagKafkaConnector() {
-        return flagKafkaConnector;
-    }
+    public boolean isFlagKafkaConnector() { return flagKafkaConnector; }
 }

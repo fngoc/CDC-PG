@@ -3,6 +3,7 @@ import com.beust.jcommander.ParameterException;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 public class Main {
 
@@ -16,19 +17,24 @@ public class Main {
             System.exit(0);
         }
         try {
-            DriverConnect.setProperties(arguments);
-            DriverConnect.run();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-            System.out.println("1. Make sure you have the wal2json plugin installed:\n" +
-                    "You can install it with [apt-get install postgresql-13-wal2json] command.\n\n" +
-                    "2. Also make sure that the following values are in the PostgreSQL configuration file:\n" +
-                    "max_wal_senders = 4 - greater than zero\n" +
-                    "wal_level = logical\n" +
-                    "max_replication_slots = 4 - greater than zero\n\n" +
-                    "3. Make sure you are not overshot the replication slot limit.");
-        } catch (IOException ioException) {
+            ConnectionManager connectionManager = new ConnectionManager(arguments);
+            ReaderSQL readerSQL = new ReaderSQL();
+            readerSQL.reedToFile(connectionManager);
+        } catch (SQLException e) {
+            System.out.println(
+                "1. You should have created a publication for the tables from which you want to read the changes." +
+                "2. Also make sure that the following values are in the PostgreSQL configuration file:\n" +
+                "max_wal_senders = 4 - greater than zero\n" +
+                "wal_level = logical\n" +
+                "max_replication_slots = 4 - greater than zero\n\n" +
+                "2. Make sure you are not overshot the replication slot limit."
+            );
+        } catch (IOException e) {
             System.out.println("Problem creating or writing to file");
+        } catch (ParseException e) {
+            System.out.println("An error occurred while decoding");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

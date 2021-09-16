@@ -17,6 +17,9 @@ public class Args {
     @Parameter(names = {"-database", "-d"}, arity = 1, description = "Database", required = true)
     private String database;
 
+    @Parameter(names = {"-publication", "-l"}, arity = 1, description = "Publication", required = true)
+    private String publication;
+
     @Parameter(names = {"-replica", "-r"}, arity = 1, description = "Name replica")
     private String nameReplica = null;
 
@@ -37,6 +40,8 @@ public class Args {
     public String getDatabase() { return database; }
 
     public String getNameReplica() { return nameReplica; }
+
+    public String getPublication() { return publication; }
 
     public String getPath() { return path; }
 

@@ -9,8 +9,12 @@ import java.nio.ByteBuffer;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ReaderSQL {
+
+    private static Logger logger = Logger.getLogger(ReaderSQL.class.getName());
 
     public void reedToFile(ConnectionManager connectionManager) throws SQLException, IOException, ParseException {
         File outputFile = new File(connectionManager.getPathFile());
@@ -41,7 +45,7 @@ public class ReaderSQL {
     }
 
     private void writeInFile(File file, String text) throws IOException {
-        System.out.println(text);
+        logger.log(Level.INFO, text);
         FileWriter fileWriter = new FileWriter(file, true);
         fileWriter.write(text);
         fileWriter.write('\n');

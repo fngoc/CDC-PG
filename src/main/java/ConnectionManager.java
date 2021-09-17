@@ -5,8 +5,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConnectionManager {
+
+    private static Logger logger = Logger.getLogger(ConnectionManager.class.getName());
 
     private static PGConnection replConnection;
 
@@ -21,7 +25,7 @@ public class ConnectionManager {
         setProperties(args);
     }
 
-    public static void setProperties(Args args) throws Exception {
+    private static void setProperties(Args args) throws Exception {
         flagKafkaConnector = args.isFlagKafkaConnector();
         Properties props = new Properties();
         PGProperty.USER.set(props, args.getLogin());
@@ -49,7 +53,7 @@ public class ConnectionManager {
 
     private static void createReplicationSlot() {
         if (replicaName.equals("replica_slot"))
-            System.out.println("A slot with this name already exists, default replica name is chosen [replica_slot]");
+            logger.log(Level.INFO, "A slot with this name already exists, default replica name is chosen [replica_slot]");
         try {
             replConnection.getReplicationAPI()
                     .createReplicationSlot()
@@ -57,10 +61,10 @@ public class ConnectionManager {
                     .withSlotName(replicaName)
                     .withOutputPlugin("pgoutput")
                     .make();
-            System.out.println("New replication slot created");
+            logger.log(Level.INFO, "New replication slot created");
         }
         catch (SQLException sqlException) {
-            System.out.println("Connected to an existing replication slot");
+            logger.log(Level.INFO, "Connected to an existing replication slot");
         }
     }
 

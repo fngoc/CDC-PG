@@ -10,51 +10,27 @@ public class Column {
     private String dataTypeName;
     private int typeModifier;
 
-    public int getPosition() {
-        return position;
-    }
+    public int getPosition() { return position; }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
+    public void setPosition(int position) { this.position = position; }
 
-    public char isKey() {
-        return isKey;
-    }
+    public char isKey() { return isKey; }
 
-    public void setIsKey(char isKey) {
-        this.isKey = isKey;
-    }
+    public void setIsKey(char isKey) { this.isKey = isKey; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
-    public int getDataTypeId() {
-        return dataTypeId;
-    }
+    public int getDataTypeId() { return dataTypeId; }
 
-    public void setDataTypeId(int dataTypeId) {
-        this.dataTypeId = dataTypeId;
-    }
+    public void setDataTypeId(int dataTypeId) { this.dataTypeId = dataTypeId; }
 
-    public String getDataTypeName() {
-        return dataTypeName;
-    }
+    public String getDataTypeName() { return dataTypeName; }
 
-    public void setDataTypeName(String dataTypeName) {
-        this.dataTypeName = dataTypeName;
-    }
+    public void setDataTypeName(String dataTypeName) { this.dataTypeName = dataTypeName; }
 
-    public int getTypeModifier() {
-        return typeModifier;
-    }
+    public int getTypeModifier() { return typeModifier; }
 
-    public void setTypeModifier(int typeModifier) {
-        this.typeModifier = typeModifier;
-    }
+    public void setTypeModifier(int typeModifier) { this.typeModifier = typeModifier; }
 }

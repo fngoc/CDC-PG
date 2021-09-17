@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class ReaderSQL {
 
-    private static Logger logger = Logger.getLogger(ReaderSQL.class.getName());
+    private static final Logger logger = Logger.getLogger(ReaderSQL.class.getName());
 
     public void reedToFile(ConnectionManager connectionManager) throws SQLException, IOException, ParseException {
         File outputFile = new File(connectionManager.getPathFile());

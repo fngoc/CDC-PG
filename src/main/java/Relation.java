@@ -1,9 +1,10 @@
 import java.util.HashMap;
 
+/**
+ *  Relation class represents a database's table metadata.
+ */
+
 public class Relation {
-    /**
-     *  Relation class represents a database's table metadata.
-     */
 
     private int id;
     private String namespace;
@@ -37,4 +38,4 @@ public class Relation {
     public short getNumColumns() { return numColumns; }
 
     public void setNumColumns(short numColumns) { this.numColumns = numColumns; }
-} 
+}

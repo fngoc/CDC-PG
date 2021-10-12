@@ -1,7 +1,8 @@
+/**
+ *  Column class represents a table's column metadata.
+ */
+
 public class Column {
-    /**
-     *  Column class represents a table's column metadata.
-     */
 
     private int position;
     private char isKey;

@@ -12,9 +12,9 @@ public class ConnectionManager {
 
     private static final Logger logger = Logger.getLogger(ConnectionManager.class.getName());
 
+    private static Connection sqlConnection;
     private static PGConnection replConnection;
 
-    private static Connection sqlConnection;
     private static String replicaName;
     private static String publicationName;
     private static String pathFile;

@@ -11,11 +11,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ *  Decode class defines the methods to convert binary buffer read from
+ *  replication slot in a string message.
+ */
+
 public class Decode {
-    /**
-     *  Decode class defines the methods to convert binary buffer read from 
-     *  replication slot in a string message.
-     */
 
     private static HashMap<Integer, String> dataTypes = new HashMap<Integer, String>();
     private HashMap<Integer, Relation> relations = new HashMap<Integer, Relation>();

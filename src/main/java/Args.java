@@ -29,6 +29,12 @@ public class Args {
     @Parameter(names = {"-k"}, description = "Flag for Kafka Connector")
     private boolean flagKafkaConnector;
 
+    @Parameter(names = {"-topic", "-t"}, arity = 1, description = "Topic name")
+    private String topicName = null;
+
+    @Parameter(names = {"-bootstrap", "-ba"}, arity = 1, description = "Kafka bootstrap address")
+    private String bootstrapAddress = null;
+
     public String getIp() { return ip; }
 
     public String getPort() { return port; }
@@ -46,4 +52,8 @@ public class Args {
     public String getPath() { return path; }
 
     public boolean isFlagKafkaConnector() { return flagKafkaConnector; }
+
+    public String getTopic() { return topicName; }
+
+    public String getBootstrapAddress() { return bootstrapAddress; }
 }

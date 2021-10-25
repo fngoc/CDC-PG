@@ -20,13 +20,25 @@ public class ConnectionManager {
     private static String pathFile;
 
     private static boolean flagKafkaConnector;
+    private static String topicName;
+    private static String bootstrapAddress;
 
     public ConnectionManager(Args args) throws Exception {
         setProperties(args);
     }
 
     private static void setProperties(Args args) throws Exception {
-        flagKafkaConnector = args.isFlagKafkaConnector();
+        if ((flagKafkaConnector = args.isFlagKafkaConnector())) {
+            try {
+                topicName = args.getTopic();
+                bootstrapAddress = args.getBootstrapAddress();
+            } catch (Exception e) {
+                logger.log(Level.WARNING, "If you want to send a message to Kafka, " +
+                        "you also need to use the flags: [-t topic_name] and [-ba bootstrap_address]");
+                return;
+            }
+        }
+
         Properties props = new Properties();
         PGProperty.USER.set(props, args.getLogin());
         PGProperty.PASSWORD.set(props, args.getPassword());
@@ -79,4 +91,8 @@ public class ConnectionManager {
     public String getPathFile() { return pathFile; }
 
     public boolean isFlagKafkaConnector() { return flagKafkaConnector; }
+
+    public static String getTopic() { return topicName; }
+
+    public static String getBootstrapAddress() { return bootstrapAddress; }
 }

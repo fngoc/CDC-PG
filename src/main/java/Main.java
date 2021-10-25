@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Main {
 
-    private static final Logger logger = Logger.getLogger(Main.class.getName());
+    private static Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
         Args arguments = new Args();
@@ -26,12 +26,12 @@ public class Main {
             readerSQL.reedToFile(connectionManager);
         } catch (SQLException e) {
             logger.log(Level.WARNING,
-                "\n1. You should have created a publication for the tables from which you want to read the changes.\n" +
-                "2. Also make sure that the following values are in the PostgreSQL configuration file:\n" +
-                "max_wal_senders = 4 - greater than zero\n" +
-                "wal_level = logical\n" +
-                "max_replication_slots = 4 - greater than zero\n" +
-                "3. Make sure you are not overshot the replication slot limit."
+                    "\n1. You should have created a publication for the tables from which you want to read the changes.\n" +
+                            "2. Also make sure that the following values are in the PostgreSQL configuration file:\n" +
+                            "max_wal_senders = 4 - greater than zero\n" +
+                            "wal_level = logical\n" +
+                            "max_replication_slots = 4 - greater than zero\n" +
+                            "3. Make sure you are not overshot the replication slot limit."
             );
         } catch (IOException e) {
             logger.log(Level.WARNING,"Problem creating or writing to file");

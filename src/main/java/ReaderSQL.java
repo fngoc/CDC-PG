@@ -1,10 +1,8 @@
-import org.apache.commons.codec.binary.Base64;
+import decoding.Decode;
 import org.json.JSONObject;
 import org.postgresql.replication.PGReplicationStream;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -37,7 +35,7 @@ public class ReaderSQL {
             String jsonString = new JSONObject(message).toString(2);
             writeInFile(outputFile, jsonString);
             if (connectionManager.isFlagKafkaConnector())
-                sendRequestToKafkaConnector(jsonString);
+                sendRequestToKafkaConnector(jsonString, connectionManager.getTopic(), connectionManager.getBootstrapAddress());
             // Replication feedback
             stream.setAppliedLSN(stream.getLastReceiveLSN());
             stream.setFlushedLSN(stream.getLastReceiveLSN());
@@ -52,21 +50,9 @@ public class ReaderSQL {
         fileWriter.close();
     }
 
-    private void sendRequestToKafkaConnector(String message) throws IOException {
-        JSONObject jsonObject= new JSONObject(message);
-        byte[] bytesEncoded = Base64.encodeBase64(jsonObject.toString().getBytes());
-
-        String url = "http://localhost:8080/publish?message=" + new String(bytesEncoded);
-        URL obj = new URL(url);
-        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-        connection.setRequestMethod("GET");
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
+    private void sendRequestToKafkaConnector(String message, String topicName, String bootstrapAddress) {
+        JSONObject jsonMessage= new JSONObject(message);
+        KafkaMessageProducer reportObj = new KafkaMessageProducer();
+        reportObj.send(topicName, bootstrapAddress, jsonMessage.toString());
     }
 }

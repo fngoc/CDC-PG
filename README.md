@@ -7,3 +7,5 @@ Change Data Capture (CDC) PostgreSQL is the process of recognising when data has
 ## Usage
 
 Program arguments: `-i ip` `-p port` `-u user_name` `-w password` `-d database_name` `-l publication_name` `[-r replica_slot_name]` `[-f file_path]`
+
+If you want to send the resulting JSON to Kafka enter the following arguments: `-k -t [topic_name] -ba [bootstrap_servers kafka]`

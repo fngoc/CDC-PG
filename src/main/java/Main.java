@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Main {
 
-    private static Logger logger = Logger.getLogger(Main.class.getName());
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
         Args arguments = new Args();
@@ -17,7 +17,8 @@ public class Main {
             JCommander.newBuilder().addObject(arguments).build().parse(args);
         } catch (ParameterException parameterException) {
             logger.log(Level.WARNING, "Invalid login details, example: -i ip -p port -u user_name " +
-                    "-w password -d database_name [-r replica_slot_name] [-f file_path]");
+                    "-w password -d database_name [-r replica_slot_name] [-f file_path]\n" +
+                    "If you want connect to Kafka: -k -t [topic_name] -ba [bootstrap_servers kafka]");
             System.exit(0);
         }
         try {

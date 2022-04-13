@@ -1,4 +1,7 @@
-import decoding.Decode;
+package org.vitmarkha.decoding;
+
+import org.vitmarkha.ConnectionManager;
+import org.vitmarkha.KafkaMessageProducer;
 import org.json.JSONObject;
 import org.postgresql.replication.PGReplicationStream;
 

@@ -1,3 +1,5 @@
+package org.vitmarkha;
+
 import org.postgresql.PGConnection;
 import org.postgresql.PGProperty;
 

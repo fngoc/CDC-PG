@@ -1,3 +1,5 @@
+package org.vitmarkha;
+
 import com.beust.jcommander.Parameter;
 
 public class Args {

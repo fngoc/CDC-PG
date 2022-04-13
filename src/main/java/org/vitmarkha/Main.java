@@ -1,5 +1,8 @@
+package org.vitmarkha;
+
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import org.vitmarkha.decoding.ReaderSQL;
 
 import java.io.IOException;
 import java.sql.SQLException;

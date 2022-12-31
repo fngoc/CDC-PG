@@ -1,4 +1,4 @@
-package org.vitmarkha.decoding;
+package org.fngoc.decoding;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;

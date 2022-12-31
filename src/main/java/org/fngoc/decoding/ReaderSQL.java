@@ -1,7 +1,7 @@
-package org.vitmarkha.decoding;
+package org.fngoc.decoding;
 
-import org.vitmarkha.ConnectionManager;
-import org.vitmarkha.KafkaMessageProducer;
+import org.fngoc.ConnectionManager;
+import org.fngoc.KafkaMessageProducer;
 import org.json.JSONObject;
 import org.postgresql.replication.PGReplicationStream;
 

@@ -1,4 +1,4 @@
-package org.vitmarkha;
+package org.fngoc;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;

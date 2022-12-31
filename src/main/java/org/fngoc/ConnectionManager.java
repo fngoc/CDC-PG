@@ -1,4 +1,4 @@
-package org.vitmarkha;
+package org.fngoc;
 
 import org.postgresql.PGConnection;
 import org.postgresql.PGProperty;

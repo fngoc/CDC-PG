@@ -1,4 +1,4 @@
-package org.vitmarkha;
+package org.fngoc;
 
 import com.beust.jcommander.Parameter;
 

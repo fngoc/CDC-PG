@@ -1,4 +1,4 @@
-package org.vitmarkha.decoding;
+package org.fngoc.decoding;
 
 /**
  *  Column class represents a table's column metadata.

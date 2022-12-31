@@ -1,4 +1,4 @@
-# CDC_PostgreSQL
+# CDC-PG
 
 ## Description
 

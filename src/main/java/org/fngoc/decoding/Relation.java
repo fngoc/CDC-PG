@@ -1,4 +1,4 @@
-package org.vitmarkha.decoding;
+package org.fngoc.decoding;
 
 import java.util.HashMap;
 
